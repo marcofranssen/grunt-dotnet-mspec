@@ -1,0 +1,49 @@
+{
+  "name": "grunt-dotnet-mspec",
+  "description": "Grunt plugin to run Machine.Specfication tests",
+  "version": "0.0.0",
+  "homepage": "https://github.com/marcofranssen/grunt-dotnet-mspec",
+  "author": {
+    "name": "Marco Franssen",
+    "email": "marco.franssen@gmail.com",
+    "url": "http://marcofranssen.nl/about"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/marcofranssen/grunt-dotnet-mspec.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marcofranssen/grunt-dotnet-mspec/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/marcofranssen/grunt-dotnet-mspec/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.2"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.2"
+  },
+  "keywords": [
+    "gruntplugin",
+    "grunt",
+    ".net",
+    "dotnet",
+    "c#",
+    "csharp",
+    "mspec",
+    "test"
+  ]
+}
