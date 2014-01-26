@@ -37,47 +37,47 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.toolsPath
 Type: `String`
-Default value: `',  '`
+Default value: ``
 
-A string value that is used to do something with whatever.
+A string value pointing to the mspec tools folder (this folder should contain the mspec-clr4.exe etc.).
 
-#### options.punctuation
+#### options.output
 Type: `String`
-Default value: `'.'`
+Default value: `reports/mspec`
 
-A string value that is used to do something else with whatever else.
+A string value pointing to the folder where the reports should be generated.
+
+#### options.timeinfo
+Type: `Boolean`
+Default value: `true`
+
+A boolean value indicating if time related info should be shown in the html report.
+
+
+
+#### options.platform
+Type: `String`
+Default value: `anycpu`
+Possible values: `anycpu|x86`
+
+A string value indicating what platform to use for running the tests
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  mspec: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+The toolsPath in this example points to the mspec nuget package tools folder. The report will be stored in the reports folder relative to your grunt file. The specs target will execute all dll's ending with `Spec.dll` located in all `bin/Debug` folders within the `test/src` folder. 
 
 ```js
 grunt.initConfig({
   mspec: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      toolsPath: 'test/src/packages/Machine.Specifications.0.6.2/tools',
+      output: 'reports/mspec'
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    specs: {
+      src: ['test/src/**/bin/Debug/*Specs.dll']
+    }
   },
 });
 ```
