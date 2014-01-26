@@ -8,42 +8,71 @@
 
 'use strict';
 
+var path = require('path'),
+    buildCommand = function (grunt, files, options) {
+      var mspec = options.platform === 'x86' ? 'mspec-x86-clr4.exe' : 'mspec-clr4.exe';
+      if (options.toolsPath) {
+        if (!grunt.file.isPathAbsolute(options.toolsPath)) {
+          options.toolsPath = path.join(process.cwd(), options.toolsPath);
+        }
+        mspec = path.join(options.toolsPath, mspec);
+      }
+      mspec = mspec.replace(/\\/g, path.sep);
+      var assemblies = files.map(function (file) { return '"' + file.src + '"'; });
+      var args = assemblies;
+
+      if (options.timeinfo) { args.unshift('-t'); }
+      if (options.output) {
+        var filePath = path.join(process.cwd(), options.output);
+        grunt.file.mkdir(filePath);
+        args.unshift('"' + path.join(filePath, 'index.xml') + '"');
+        args.unshift('--xml');
+        args.unshift('"' + filePath + '"');
+        args.unshift('--html');
+      }
+      
+      return {
+        path: path.normalize(mspec),
+        args: args
+      };
+    };
+
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
   grunt.registerMultiTask('mspec', 'Grunt plugin to run Machine.Specfication tests', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
+
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
+          platform: 'anycpy',
+          timeinfo: true,
+          output: 'reports/mspec'
+        }),
+        files = this.files,
+        taskComplete = this.async();
+    var command = buildCommand(grunt, files, options);
+
+    console.log();
+    console.log('mspec test runner');
+    console.log();
+    console.log(command.path + ' ' + command.args.join(' '));
+    console.log();
+    
+    var log = function (message) { console.log(message.toString('utf8')); };
+    var mspecProcess = grunt.util.spawn({
+      cmd: command.path,
+      args: command.args,
+      opts: { windowsVerbatimArguments: true }
+    }, function (err, result, code) {
+      if (code > 0) {
+        grunt.fail.fatal('Tests failed');
+      }
+      String(result);
+      taskComplete(code === 0);
     });
-
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
+    
+    mspecProcess.stdout.on('data', log);
+    mspecProcess.stderr.on('data', log);
+    mspecProcess.on('error', function (err) {
+      grunt.fail.fatal(err.code === 'ENOENT' ? 'Unable to find the mspec executable located at "' + command.path + '".' : err.message);
     });
   });
 
