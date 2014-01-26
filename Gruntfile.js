@@ -44,6 +44,33 @@ module.exports = function(grunt) {
       tests: ['test/*_test.js'],
     },
 
+    // restore nuget package for test project
+    shell: {
+      nuget: {
+        options: {
+          stdout: true,
+          execOptions: {
+              cwd: 'test/src'
+          }
+        },
+        command: 'nuget restore'
+      }
+    },
+
+    // msbuild to build the test project
+    msbuild: {
+      src: ['test/**/*.csproj'],
+      options: {
+        projectConfiguration: 'Debug',
+        targets: ['Clean', 'Rebuild'],
+        stdout: true,
+        maxCpuCount: 4,
+        buildParameters: {
+            WarningLevel: 4
+        },
+        verbosity: 'quiet'
+      }  
+    }
   });
 
   // Actually load this plugin's task(s).
@@ -53,10 +80,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-msbuild');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'mspec', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'shell:nuget', 'msbuild', 'mspec', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
