@@ -55,7 +55,17 @@ Default value: `true`
 
 A boolean value indicating if time related info should be shown in the html report.
 
+#### options.silent
+Type: `Boolean`
+Default value: `false`
 
+A boolean value indicating if progress should be suppressed (only print fatal errors, failures and summary).
+
+#### options.progress
+Type: `Boolean`
+Default value: `false`
+
+A boolean value indicating if progress should be shown as dotted output.
 
 #### options.platform
 Type: `String`

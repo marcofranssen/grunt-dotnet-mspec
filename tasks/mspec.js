@@ -22,6 +22,8 @@ var path = require('path'),
       var args = assemblies;
 
       if (options.timeinfo) { args.unshift('-t'); }
+      if (options.silent) { args.unshift('-s'); }
+      if (options.progress) { args.unshift('-p'); }
       if (options.output) {
         var filePath = path.join(process.cwd(), options.output);
         grunt.file.mkdir(filePath);
