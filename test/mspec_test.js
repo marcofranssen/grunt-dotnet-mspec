@@ -27,21 +27,15 @@ exports.mspec = {
     // setup here if necessary
     done();
   },
-  default_options: function(test) {
-    test.expect(1);
+  report: function(test) {
+    test.expect(3);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
-
-    test.done();
-  },
-  custom_options: function(test) {
-    test.expect(1);
-
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+    var index_html_exists = grunt.file.exists('reports/mspec/index.html');
+    var index_xml_exists = grunt.file.exists('reports/mspec/index.xml');
+    var myspecs_html_exists = grunt.file.exists('reports/mspec/MySpecs.html');
+    test.ok(index_html_exists, 'reports/mspec/index.html should exist');
+    test.ok(index_xml_exists, 'reports/mspec/index.xml should exist');
+    test.ok(myspecs_html_exists, 'reports/mspec/MySpecs.html should exist');
 
     test.done();
   },
