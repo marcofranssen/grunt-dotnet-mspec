@@ -1,3 +1,7 @@
 node_modules
 npm-debug.log
-tmp
+reports
+test/src/**/bin
+test/src/**/obj
+test/src/packages
+test/src/**/*.suo
