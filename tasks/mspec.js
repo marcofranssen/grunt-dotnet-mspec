@@ -44,12 +44,12 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('mspec', 'Grunt plugin to run Machine.Specfication tests', function() {
 
     var options = this.options({
-          platform: 'anycpy',
-          timeinfo: true,
-          output: 'reports/mspec'
-        }),
-        files = this.files,
-        taskComplete = this.async();
+      platform: 'anycpu',
+      timeinfo: true,
+      output: 'reports/mspec'
+    }),
+      files = this.files,
+      taskComplete = this.async();
     var command = buildCommand(grunt, files, options);
 
     console.log();
