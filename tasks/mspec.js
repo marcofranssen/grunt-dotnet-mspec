@@ -12,14 +12,14 @@ var path = require('path'),
   buildCommand = function(grunt, files, options) {
     var mspec = options.platform === 'x86' ? 'mspec-x86-clr4.exe' : 'mspec-clr4.exe';
     if (options.toolsPath) {
-      if (!grunt.file.isPathAbsolute(options.toolsPath)) {
-        options.toolsPath = path.join(process.cwd(), options.toolsPath);
-      }
-      mspec = path.join(options.toolsPath, mspec);
-    }
+		if (!grunt.file.isPathAbsolute(options.toolsPath)) {
+			options.toolsPath = path.join(process.cwd(), options.toolsPath);
+		}
+		mspec = path.join(options.toolsPath, mspec); 
+	}
     mspec = mspec.replace(/\\/g, path.sep);
     var assemblies = files.map(function(file) {
-      return '"' + file.src + '"';
+      return file.src;
     });
     var args = assemblies;
 
@@ -35,9 +35,9 @@ var path = require('path'),
     if (options.output) {
       var filePath = path.join(process.cwd(), options.output);
       grunt.file.mkdir(filePath);
-      args.unshift('"' + path.join(filePath, 'index.xml') + '"');
+      args.unshift(path.join(filePath, 'index.xml'));
       args.unshift('--xml');
-      args.unshift('"' + filePath + '"');
+      args.unshift(filePath);
       args.unshift('--html');
     }
 
@@ -69,12 +69,10 @@ module.exports = function(grunt) {
     var log = function(message) {
       console.log(message.toString('utf8'));
     };
+
     var mspecProcess = grunt.util.spawn({
       cmd: command.path,
       args: command.args,
-      opts: {
-        windowsVerbatimArguments: true
-      }
     }, function(err, result, code) {
       if (code > 0) {
         grunt.fail.fatal('Tests failed');

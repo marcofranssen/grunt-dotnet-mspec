@@ -40,3 +40,22 @@ exports.mspec = {
     test.done();
   },
 };
+
+exports.mspec_including_path_with_spaces = {
+    setUp: function (done) {
+        // setup here if necessary
+        done();
+    },
+    report: function (test) {
+        test.expect(3);
+
+        var index_html_exists = grunt.file.exists('reports space included path/mspec/index.html');
+        var index_xml_exists = grunt.file.exists('reports space included path/mspec/index.xml');
+        var myspecs_html_exists = grunt.file.exists('reports space included path/mspec/MySpecs.html');
+        test.ok(index_html_exists, 'reports space included path/mspec/index.html should exist');
+        test.ok(index_xml_exists, 'reports space included path/mspec/index.xml should exist');
+        test.ok(myspecs_html_exists, 'reports space included path/mspec/MySpecs.html should exist');
+
+        test.done();
+    },
+};
