@@ -1,7 +1,7 @@
 {
   "name": "grunt-dotnet-mspec",
   "description": "Grunt plugin to run Machine.Specfication tests",
-  "version": "0.3.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/marcofranssen/grunt-dotnet-mspec",
   "author": {
     "name": "Marco Franssen",
