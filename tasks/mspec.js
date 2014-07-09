@@ -12,11 +12,11 @@ var path = require('path'),
   buildCommand = function(grunt, files, options) {
     var mspec = options.platform === 'x86' ? 'mspec-x86-clr4.exe' : 'mspec-clr4.exe';
     if (options.toolsPath) {
-		if (!grunt.file.isPathAbsolute(options.toolsPath)) {
-			options.toolsPath = path.join(process.cwd(), options.toolsPath);
-		}
-		mspec = path.join(options.toolsPath, mspec); 
-	}
+      if (!grunt.file.isPathAbsolute(options.toolsPath)) {
+        options.toolsPath = path.join(process.cwd(), options.toolsPath);
+      }
+      mspec = path.join(options.toolsPath, mspec);
+    }
     mspec = mspec.replace(/\\/g, path.sep);
     var assemblies = files.map(function(file) {
       return file.src;
@@ -83,7 +83,7 @@ module.exports = function(grunt) {
 
     mspecProcess.stdout.on('data', log);
     mspecProcess.stderr.on('data', log);
-    mspecProcess.on('error', function(err) {
+    mspecProcess.on('error', function (err) {
       grunt.fail.fatal(err.code === 'ENOENT' ? 'Unable to find the mspec executable located at "' + command.path + '".' : err.message);
     });
   });
