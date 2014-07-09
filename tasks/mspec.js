@@ -69,7 +69,6 @@ module.exports = function(grunt) {
     var log = function(message) {
       console.log(message.toString('utf8'));
     };
-
     var mspecProcess = grunt.util.spawn({
       cmd: command.path,
       args: command.args,
