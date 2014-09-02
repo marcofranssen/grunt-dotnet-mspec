@@ -69,8 +69,19 @@ module.exports = function(grunt) {
             WarningLevel: 4
         },
         verbosity: 'quiet'
-      }  
-    }
+      }
+    },
+
+    mochaTest:{
+  		testPosts:{
+			options: {
+				reporter: 'spec',
+				timeout: 10000,
+				clearRequireCache: false
+			},
+			src: [ 'test/mspec.spec.js' ]
+  		}
+  	}
   });
 
   // Actually load this plugin's task(s).
@@ -82,10 +93,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-msbuild');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'shell:nuget', 'msbuild', 'mspec', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'shell:nuget', 'msbuild', 'mspec', 'nodeunit', 'mochaTest']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
