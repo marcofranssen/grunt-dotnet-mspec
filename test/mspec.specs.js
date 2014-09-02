@@ -2,21 +2,19 @@ var assert = require('assert'),
     grunt = require('grunt'),
     mspec = require('../tasks/mspec.js');
 
-describe('MSpec parameter handling', function(){
-  before(function(){
     var options = {};
-    var oneSpecFile = { 'Spec.dll' };
-    var twoSpecFiles = { 'Specs.dll', 'SpecsTwo.dll' };
-  });
+    var oneSpecFile = { src: 'Spec.dll' };
 
+describe('MSpec parameter handling', function(){
   describe('If ONE *.dll is passed to grunt-dotnet-mspec', function(){
     it('should grep this ONE', function(){
-      mspec.buildCommand();
+      var command = mspec.buildCommand(grunt, oneSpecFile, options);
+      assert.equal(command.args[0], 'Spec.dll');
     });
   });
 
-  describe('If TWO *.dll is passed to grunt-dotnet-mspec', function(){
-    it('should grep this TWO', function(){
+  describe('If TWO *.dlls are passed to grunt-dotnet-mspec', function(){
+    it('should grep these TWO', function(){
 
     });
   });
