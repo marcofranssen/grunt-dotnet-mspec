@@ -1,6 +1,6 @@
 var assert = require('should'),
     grunt = require('grunt'),
-    Command = require('../tasks/mspec.command');
+    Command = require('../lib/mspec.command');
 
     var options = { platform: 'anycpu' };
     var oneSpecFile = [{ src: ['Spec.dll'] }];

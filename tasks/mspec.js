@@ -8,7 +8,7 @@
 
 'use strict';
 
-var Command = require('./mspec.command'),
+var Command = require('../lib/mspec.command'),
     name = 'mspec',
     description = 'Grunt plugin to run Machine.Specfication tests';
 
