@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 				timeout: 10000,
 				clearRequireCache: false
 			},
-			src: [ 'test/mspec.specs.js' ]
+			src: [ 'test/*.specs.js' ]
   		}
   	}
   });
