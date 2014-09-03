@@ -34,7 +34,8 @@
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt-mocha-test": "^0.11.0",
     "grunt-msbuild": "~0.1.9",
-    "grunt-shell": "~0.6.4"
+    "grunt-shell": "~0.6.4",
+    "should": "^4.0.4"
   },
   "peerDependencies": {
     "grunt": "~0.4.2"
