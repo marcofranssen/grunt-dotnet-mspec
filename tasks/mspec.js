@@ -9,7 +9,7 @@
 'use strict';
 
 var path = require('path'),
-    buildCommand = require('./mspec.commandBuilder'),
+    Command = require('./mspec.command'),
     name = 'mspec',
     description = 'Grunt plugin to run Machine.Specfication tests';
 
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     }),
       files = this.files,
       taskComplete = this.async();
-    var command = new buildCommand(grunt, files, options);
+    var command = new Command(grunt, files, options);
 
     console.log();
     console.log('mspec test runner');
