@@ -1,4 +1,4 @@
-var assert = require('assert'),
+var assert = require('should'),
     grunt = require('grunt'),
     Command = require('../tasks/mspec.command');
 
@@ -13,7 +13,7 @@ describe('MSpec parameter handling', function() {
     it('should grep this ONE', function() {
       var command = new Command(grunt, oneSpecFile, options);
 
-      assert.equal(command.args[0], '"Spec.dll"');
+      command.args[0].should.equal('"Spec.dll"');
     });
   });
 
@@ -22,9 +22,9 @@ describe('MSpec parameter handling', function() {
     it('should grep these TWO', function(){
       var command = new Command(grunt, twoSpecFiles, options);
       
-      assert.equal(command.args.length, 2);
-      assert.equal(command.args[0], '"SpecOne.dll"');
-      assert.equal(command.args[1], '"SpecTwo.dll"');
+      command.args.should.have.length(2);
+      command.args[0].should.equal('"SpecOne.dll"');
+      command.args[1].should.equal('"SpecTwo.dll"');
     });
   });
 });
