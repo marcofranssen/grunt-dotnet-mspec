@@ -49,7 +49,9 @@ var path = require('path'),
 
 module.exports = function(grunt) {
 
-  grunt.registerMultiTask('mspec', 'Grunt plugin to run Machine.Specfication tests', function() {
+  grunt.registerMultiTask('mspec', 'Grunt plugin to run Machine.Specfication tests', mspec);
+
+  var mspec = function() {
 
     var options = this.options({
       platform: 'anycpu',
@@ -88,6 +90,6 @@ module.exports = function(grunt) {
     mspecProcess.on('error', function(err) {
       grunt.fail.fatal(err.code === 'ENOENT' ? 'Unable to find the mspec executable located at "' + command.path + '".' : err.message);
     });
-  });
+  };
 
 };
