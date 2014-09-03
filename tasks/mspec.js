@@ -46,10 +46,12 @@ var path = require('path'),
       args: args
     };
   };
+var name = 'mspec';
+var description = 'Grunt plugin to run Machine.Specfication tests';
 
 module.exports = function(grunt) {
 
-  grunt.registerMultiTask('mspec', 'Grunt plugin to run Machine.Specfication tests', mspec);
+  grunt.registerMultiTask(name, description, mspec);
 
   var mspec = function() {
 
