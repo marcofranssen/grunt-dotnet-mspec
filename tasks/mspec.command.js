@@ -1,6 +1,7 @@
 'use strict';
 
-module.exports.command = function(grunt, files, options) {
+module.exports = function(grunt, files, options) {
+
     var mspec = options.platform === 'x86' ? 'mspec-x86-clr4.exe' : 'mspec-clr4.exe';
     if (options.toolsPath) {
       if (!grunt.file.isPathAbsolute(options.toolsPath)) {
