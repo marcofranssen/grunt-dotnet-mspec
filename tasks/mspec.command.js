@@ -11,8 +11,8 @@ module.exports = function(grunt, files, options) {
       mspec = path.join(options.toolsPath, mspec);
     }
     mspec = mspec.replace(/\\/g, path.sep);
-    var assemblies = files.map(function(file) {
-      return '"' + file.src + '"';
+    var assemblies = files[0].src.map(function(specBinary) {
+      return '"' + specBinary + '"';
     });
     var args = assemblies;
 

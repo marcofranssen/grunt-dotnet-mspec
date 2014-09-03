@@ -12,6 +12,7 @@ describe('MSpec parameter handling', function() {
 
     it('should grep this ONE', function() {
       var command = new Command(grunt, oneSpecFile, options);
+
       assert.equal(command.args[0], '"Spec.dll"');
     });
   });
