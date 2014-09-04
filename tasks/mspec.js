@@ -17,12 +17,12 @@ module.exports = function(grunt) {
   grunt.registerMultiTask(name, description, function() {
 
     var options = this.options({
-      platform: 'anycpu',
-      timeinfo: true,
-      output: 'reports/mspec'
-    }),
-      files = this.files,
-      taskComplete = this.async();
+                    platform: 'anycpu',
+                    timeinfo: true,
+                    output: 'reports/mspec'});
+    var files = this.files;
+    var taskComplete = this.async();
+    
     var command = new Command(grunt, files, options);
 
     console.log();
