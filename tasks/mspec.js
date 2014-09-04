@@ -9,6 +9,7 @@
 'use strict';
 
 var Command = require('../lib/mspec.command'),
+    log = require('../lib/mspec.log'),
     name = 'mspec',
     description = 'Grunt plugin to run Machine.Specfication tests';
 
@@ -22,18 +23,9 @@ module.exports = function(grunt) {
                     output: 'reports/mspec'});
     var files = this.files;
     var taskComplete = this.async();
-    
+
     var command = new Command(grunt, files, options);
 
-    console.log();
-    console.log('mspec test runner');
-    console.log();
-    console.log(command.path + ' ' + command.args.join(' '));
-    console.log();
-
-    var log = function(message) {
-      console.log(message.toString('utf8'));
-    };
     var mspecProcess = grunt.util.spawn({
       cmd: command.path,
       args: command.args,
