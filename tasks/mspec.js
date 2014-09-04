@@ -14,9 +14,7 @@ var Command = require('../lib/mspec.command'),
 
 module.exports = function(grunt) {
 
-  grunt.registerMultiTask(name, description, mspec);
-
-  var mspec = function() {
+  grunt.registerMultiTask(name, description, function() {
 
     var options = this.options({
       platform: 'anycpu',
@@ -55,6 +53,6 @@ module.exports = function(grunt) {
     mspecProcess.on('error', function(err) {
       grunt.fail.fatal(err.code === 'ENOENT' ? 'Unable to find the mspec executable located at "' + command.path + '".' : err.message);
     });
-  };
+  });
 
 };
