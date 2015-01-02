@@ -92,16 +92,17 @@ module.exports = function(grunt) {
             WarningLevel: 4
         },
         verbosity: 'quiet'
+      }
     },
 
     mochaTest:{
   		testPosts:{
-			options: {
-				reporter: 'spec',
-				timeout: 10000,
-				clearRequireCache: false
-			},
-			src: [ 'test/*.specs.js' ]
+			  options: {
+		  		reporter: 'spec',
+		  		timeout: 10000,
+	  			clearRequireCache: false
+		  	},
+			  src: [ 'test/*.specs.js' ]
   		}
   	}
   });
