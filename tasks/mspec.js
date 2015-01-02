@@ -19,7 +19,7 @@ var path = require('path'),
     }
     mspec = mspec.replace(/\\/g, path.sep);
     var assemblies = files.map(function(file) {
-      return '"' + file.src + '"';
+      return file.src;
     });
     var args = assemblies;
 
@@ -35,9 +35,9 @@ var path = require('path'),
     if (options.output) {
       var filePath = path.join(process.cwd(), options.output);
       grunt.file.mkdir(filePath);
-      args.unshift('"' + path.join(filePath, 'index.xml') + '"');
+      args.unshift(path.join(filePath, 'index.xml'));
       args.unshift('--xml');
-      args.unshift('"' + filePath + '"');
+      args.unshift(filePath);
       args.unshift('--html');
     }
 
@@ -72,9 +72,6 @@ module.exports = function(grunt) {
     var mspecProcess = grunt.util.spawn({
       cmd: command.path,
       args: command.args,
-      opts: {
-        windowsVerbatimArguments: true
-      }
     }, function(err, result, code) {
       if (code > 0) {
         grunt.fail.fatal('Tests failed');
@@ -85,7 +82,7 @@ module.exports = function(grunt) {
 
     mspecProcess.stdout.on('data', log);
     mspecProcess.stderr.on('data', log);
-    mspecProcess.on('error', function(err) {
+    mspecProcess.on('error', function (err) {
       grunt.fail.fatal(err.code === 'ENOENT' ? 'Unable to find the mspec executable located at "' + command.path + '".' : err.message);
     });
   });

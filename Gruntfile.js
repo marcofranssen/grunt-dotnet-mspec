@@ -25,7 +25,23 @@ module.exports = function(grunt) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['reports'],
+      tests: ['test/space included path', 'reports'],
+    },
+
+    // copy source tests files to path space included
+    copy: {
+      packageTool: {
+        expand: true,
+        flatten: true,
+        src: ['test/src/packages/Machine.Specifications.0.6.2/tools/*'],
+        dest: 'test/space included path/packages/Machine.Specifications.0.6.2/tools/'
+      },
+      testAssemblies: {
+        expand: true,
+        flatten: true,
+        src: ['test/src/MySpecs/bin/Debug/*'],
+        dest: 'test/space included path/src/MySpecs/bin/Debug/'
+      }
     },
 
     // Configuration to be run (and then tested).
@@ -36,6 +52,13 @@ module.exports = function(grunt) {
       },
       specs: {
         src: ['test/src/**/bin/Debug/*Specs.dll']
+      },
+      specs_space_path_included: {
+        options: {
+          toolsPath: 'test/space included path/packages/Machine.Specifications.0.6.2/tools/',
+          output: 'reports space included path/mspec'
+        },
+        src: ['test/space included path/src/MySpecs/bin/Debug/*Specs.dll']
       }
     },
 
@@ -69,7 +92,7 @@ module.exports = function(grunt) {
             WarningLevel: 4
         },
         verbosity: 'quiet'
-      }  
+      }
     }
   });
 
@@ -82,10 +105,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-msbuild');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'shell:nuget', 'msbuild', 'mspec', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'shell:nuget', 'msbuild', 'copy', 'mspec', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
