@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MSpec>
+  <generated>
+    <date>Freitag, 2. Januar 2015</date>
+    <time>14:09:21</time>
+  </generated>
+  <run time="214" />
+  <assembly name="MySpecs" location="C:\Users\gwoiwode\Desktop\grunt-dotnet-mspec\test\space included path\src\MySpecs\bin\Debug\MySpecs.dll" time="133">
+    <output></output>
+    <concern name="Awesomeness using node.js grunt test runner">
+      <context name="When I am executed by the grunt task" type-name="MySpecs.When_I_am_executed_by_the_grunt_task" time="61">
+        <output></output>
+        <specification leader="it" name="should have set the value to true" field-name="should_have_set_the_value_to_true" status="passed" time="53">
+          <output></output>
+        </specification>
+        <specification leader="it" name="should not throw an exception" field-name="should_not_throw_an_exception" status="passed" time="0">
+          <output></output>
+        </specification>
+      </context>
+    </concern>
+  </assembly>
+</MSpec>
