@@ -20,7 +20,7 @@ var path = require('path'),
     mspec = mspec.replace(/\\/g, path.sep);
 
     var assemblies = files[0].src.map(function(file) {
-      return '"' + file + '"';
+      return file;
     });
     var args = assemblies;
 
