@@ -33,7 +33,7 @@
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt": "~0.4.2",
     "grunt-msbuild": "~0.1.9",
-    "grunt-shell": "~0.6.4",
+    "grunt-shell": "~3.0.1",
     "grunt-contrib-copy": "~0.5.0"
   },
   "peerDependencies": {
